@@ -86,7 +86,7 @@ def queryGeoDB(coordsPOI):
     for coord in coordsPOI:#loop through each stop over coordinate to find nearest city.
         url = "https://wft-geo-db.p.rapidapi.com/v1/geo/locations/" + str(coord[0]) + str(coord[1]) + "/nearbyCities"
 
-        querystring = {"limit":"1","minPopulation":"500000","distanceUnit":"MI","radius":"35"}
+        querystring = {"limit":"1","minPopulation":"100000","distanceUnit":"MI","radius":"35"}
 
         headers = {
             'x-rapidapi-host': "wft-geo-db.p.rapidapi.com",
@@ -98,7 +98,7 @@ def queryGeoDB(coordsPOI):
         responseData = json.loads(response.text)
         responseCount = responseData["metadata"]["totalCount"]
 
-        if responseCount == 0: #if no cities with population > 5000000, change population requirement.
+        if responseCount == 0: #if no cities with population > 1000000, change population requirement.
             url = "https://wft-geo-db.p.rapidapi.com/v1/geo/locations/" + str(coord[0]) + str(coord[1]) + "/nearbyCities"
 
             querystring = {"limit":"1","distanceUnit":"MI","radius":"35"}
